@@ -6,7 +6,15 @@ import { Component } from '@angular/core'
   template: `
     <div class="app">
       <h1 [innerHTML]="title"></h1>
-      <input type="test" [value]="name">
+      <button (click)="handleClick()">
+        Change name
+      </button>
+      <input 
+        type="test" 
+        [value]="name"
+        (input)="handleInput($event)"
+        (blur)="handleBlur($event)"
+      >
       {{ name }}<p>One way data flow - changing value in input, does not affect name elsewhere</p> 
       <div>
         {{ numberOne + numberTwo }}
@@ -19,6 +27,16 @@ import { Component } from '@angular/core'
 })
 export class AppComponent {
   title: string
+  handleClick () {
+    this.name = 'Motto'
+  }
+  handleInput(event: any) {
+    this.name=event.target.value
+  }
+  handleBlur(event: any) {
+    this.name = event.target.value
+    console.log(event)
+  }
   isHappy: boolean = true
   name: string = 'Chris' 
   numberOne: number = 1
