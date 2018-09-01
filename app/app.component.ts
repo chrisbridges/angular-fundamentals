@@ -11,9 +11,7 @@ import { Component } from '@angular/core'
       </button>
       <input 
         type="test" 
-        [value]="name"
-        (input)="handleInput($event)"
-        (blur)="handleBlur($event)"
+        [(ngModel)]="name"
       >
       {{ name }}<p>One way data flow - changing value in input, does not affect name elsewhere</p> 
       <div>
@@ -30,8 +28,8 @@ export class AppComponent {
   handleClick () {
     this.name = 'Motto'
   }
-  handleInput(event: any) {
-    this.name=event.target.value
+  handleChange(value: string) {
+    this.name=value
   }
   handleBlur(event: any) {
     this.name = event.target.value
